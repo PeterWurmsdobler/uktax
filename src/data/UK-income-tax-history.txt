@@ -1,0 +1,42 @@
+UK Tax Structure: 2008 – 2025
+
+    Period 1: The Two-Band Era (Pre-April 2010)
+        Personal Allowance: £6,475 (No taper; everyone gets it)
+        Income Tax Bands:
+            Basic Rate (20%): On income up to £37,400
+            Higher Rate (40%): On all income above £37,400
+        National Insurance (NI):
+            Primary Threshold: £5,715 (Start paying NI)
+            Main Rate (11%): On income up to £43,875 (UEL)
+            Additional Rate (1%): On income above £43,875
+    Period 2: The Introduction of the "Additional Rate" (2010 – 2013)
+        Personal Allowance: Starts at £6,475 (Frozen/Slowly rising)
+            The Taper: Starts at £100,000 (£1 lost for every £2 earned)
+        Income Tax Bands:
+            Basic Rate (20%): Up to ~£35,000
+            Higher Rate (40%): From ~£35,000 to £150,000
+            Additional Rate (50%): On all income above £150,000
+        National Insurance (NI):
+            Main Rate (12%): (Increased from 11% in 2011)
+            Additional Rate (2%): (Increased from 1% in 2011)
+            UEL: Aligned to the 40% threshold (~£42,475)
+    Period 3: The 45% Adjustment Era (2013 – 2023)
+        Personal Allowance: Increased to £12,570 (by 2021)
+            The Taper: Still starts at £100,000
+        Income Tax Bands:
+            Basic Rate (20%): Up to £37,700 (taxable)
+            Higher Rate (40%): From £37,700 to £150,000
+            Additional Rate (45%): (Reduced from 50%) on income above £150,000
+        National Insurance (NI):
+            Main Rate (12%): Up to £50,270 (UEL)
+            Additional Rate (2%): Above £50,270
+    Period 4: The Alignment Era (2023 – Present)
+        Personal Allowance: £12,570
+            The Taper: Starts at £100,000 (Allowance gone by £125,140)
+        Income Tax Bands:
+            Basic Rate (20%): Up to £37,700 (taxable)
+            Higher Rate (40%): From £37,700 to £125,140
+            Additional Rate (45%): Now starts at £125,140 (aligned with end of taper)
+        National Insurance (NI):
+            Main Rate (8%): (Cut from 12% to 8% during 2024)
+            Additional Rate (2%): Above £50,270 (UEL)
