@@ -143,7 +143,8 @@ def calculate_tax_revenue(calculator, year_key, calculator_name):
     total_ni = 0
     
     max_known_income = income_data.incomes[-1]
-    top_percentile_income = max_known_income * 1.15  # Estimate for top 1%
+    # Conservative assumption: top 1% earn at least the 99th percentile value
+    top_percentile_income = max_known_income
     
     for i in range(len(histogram.bin_counts)):
         income = histogram.bin_centers[i]
@@ -271,7 +272,8 @@ def calculate_winners_losers(calc1, calc2, name1, name2, year_key):
     losers_costs = 0
     
     max_known_income = income_data.incomes[-1]
-    top_percentile_income = max_known_income * 1.15
+    # Conservative assumption: top 1% earn at least the 99th percentile value
+    top_percentile_income = max_known_income
     
     for i in range(len(histogram.bin_counts)):
         income = histogram.bin_centers[i]
@@ -449,7 +451,8 @@ def main():
     
     # Calculate top percentile income the same way as revenue calculation
     max_known_income = hist_2023.source_data.incomes[-1]
-    top_percentile_income = max_known_income * 1.15
+    # Conservative assumption: top 1% earn at least the 99th percentile value
+    top_percentile_income = max_known_income
     
     optimal_rate, achieved_revenue = optimize_additional_rate_for_revenue(
         revenue_2023, hist_2023, top_percentile_income=top_percentile_income

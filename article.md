@@ -91,33 +91,35 @@ The most straightforward solution is to **remove the personal allowance taper en
 
 ### 2.1. Revenue-Neutral Reform: Optimized Additional Rate
 
-To maintain the same total tax revenue as the current system (£801.7 million), the reformed system removes the personal allowance taper and sets the higher rate threshold at £100,000. Using optimization techniques, we find that an **additional rate of 44.0%** (rather than the current 45%) achieves revenue neutrality.
+To maintain the same total tax revenue as the current system (£794.0 million), the reformed system removes the personal allowance taper and sets the higher rate threshold at £100,000. Using optimization techniques, we find that an **additional rate of 46.9%** (slightly higher than the current 45%) achieves revenue neutrality.
+
+**Note on methodology**: For the top 1% of earners (above the 99th percentile of £201,000), we use a conservative assumption that they earn at least this amount. This ensures our revenue calculations are realistic and avoid overestimating tax receipts from high earners.
 
 **Reformed System Characteristics:**
 - Personal allowance: £12,570 for everyone (no taper)
 - Basic rate: 20% (£12,571 - £50,270)
 - Higher rate: 40% (£50,271 - £100,000)
-- Additional rate: **44.0%** (above £100,000)
+- Additional rate: **46.9%** (above £100,000)
 - National Insurance: 8% (£12,571 - £50,270), 2% (above £50,270)
 
 ![Comparison: Current vs Revenue-Neutral Reform](article_assets/comparison_2023_vs_reformed_neutral.png)
 
 **Impact Analysis (Current system → Revenue-Neutral Reform using 2022/23 data):**
 
-- **Winners (pay less):** 2,067 people (2.1%) save an average of **£694/year**
-  - Total savings: £1,434,166
-- **Losers (pay more):** 1,925 people (1.9%) pay an average of **£745/year** more
-  - Total costs: £1,434,166
+- **Winners (pay less):** 2,383 people (2.4%) save an average of **£386/year**
+  - Total savings: £921,109
+- **Losers (pay more):** 1,610 people (1.6%) pay an average of **£572/year** more
+  - Total costs: £921,109
 - **Unchanged:** 96,006 people (96.0%)
 - **Net revenue change:** £0 (perfectly revenue neutral)
 
 **Who Benefits?** Those caught in the 60% trap (£100,000 - £125,140) benefit significantly, saving hundreds to thousands of pounds per year. The elimination of the trap also removes the incentive for tax avoidance behaviors in this income range.
 
-**Who Pays More?** High earners above approximately £155,000 face slightly higher marginal rates (44.0% instead of 45% below £125,140), but the increase is minimal. The reform creates a balanced distribution where those who benefit from eliminating the trap pay slightly more above £155,000, and the system is now internally consistent with no anomalous rate spikes.
+**Who Pays More?** High earners above approximately £145,000 face slightly higher marginal rates (46.9% instead of 45% below £125,140). The reform creates a balanced distribution where those who benefit from eliminating the trap contribute slightly more through the higher additional rate, and the system is now internally consistent with no anomalous rate spikes.
 
 ### 2.2. Reformed System with 45% Additional Rate
 
-An alternative reform maintains the current 45% additional rate while removing the taper and setting the higher rate threshold at £100,000. This results in slightly higher total revenue (£804.1 million, an increase of £2.4 million) while still eliminating the 60% trap.
+An alternative reform maintains the current 45% additional rate while removing the taper and setting the higher rate threshold at £100,000. This results in slightly lower total revenue (£790.0 million, a decrease of £4.0 million) while still eliminating the 60% trap.
 
 **Reformed System Characteristics:**
 - Personal allowance: £12,570 for everyone (no taper)
@@ -130,14 +132,49 @@ An alternative reform maintains the current 45% additional rate while removing t
 
 **Impact Analysis (Current system → 45% Reform using 2022/23 data):**
 
-- **Winners (pay less):** 1,067 people (1.1%) save an average of **£1,213/year**
-  - Total savings: £1,295,327
-- **Losers (pay more):** 2,925 people (2.9%) pay an average of **£1,257/year** more
-  - Total costs: £3,677,889
+- **Winners (pay less):** 3,993 people (4.0%) save an average of **£1,014/year**
+  - Total savings: £4,048,331
+- **Losers (pay more):** 0 people (0.0%)
+  - Total costs: £0
 - **Unchanged:** 96,006 people (96.0%)
-- **Net revenue change:** +£2.4 million
+- **Net revenue change:** -£4.0 million
 
-This variant is more politically palatable than raising the additional rate to 50.4%, as it maintains the current nominal top rate. The trade-off is that high earners above £150,000 see smaller tax increases (only £1,257/year on average rather than £5,504/year), while those in the trap still benefit substantially. The system generates slightly more revenue overall because the removal of the taper brings more income into the tax base at higher rates.
+This variant is highly politically favorable as it maintains the current 45% top rate while eliminating the 60% trap. Remarkably, **nobody pays more** under this reform - all changes are either neutral or beneficial to taxpayers. This is possible because removing the taper brings more income into the tax base at consistent rates, generating £4.0 million less revenue overall - a modest cost for eliminating a significant distortion in the tax system.
+
+## 3. Methodology: Top 1% Income Assumption
+
+### The Data Constraint
+
+HMRC publishes income distribution data from the 1st to 99th percentile. For 2022/23, the 99th percentile is £201,000. Beyond this, we have no specific data about the income distribution of the top 1% of earners. For revenue calculations involving 100,000 people, this means we know the incomes of 99,000 people but must make an assumption about the remaining 1,000.
+
+### Conservative Approach
+
+We adopt a **conservative assumption**: the top 1% earn at least the 99th percentile value (£201,000). This is the only fact we know with certainty from the data.
+
+### Why This Matters
+
+The assumption about top 1% income has a significant impact on revenue calculations and optimal rate determination:
+
+| Top 1% Assumption | Optimal Additional Rate | Reliability |
+|-------------------|------------------------|-------------|
+| **£201k (99th percentile)** | **46.9%** | ✅ Conservative, based on known data |
+| £221k (+10% speculation) | 42.8% | ⚠️ Speculative |
+| £231k (+15% speculation) | 40.9% | ❌ Optimistic, risks revenue shortfall |
+
+The difference is substantial: **6 percentage points** between the conservative and a 15% optimistic assumption!
+
+### Rationale for Conservative Choice
+
+1. **Defensible**: Based solely on actual HMRC data, not speculation
+2. **Safe**: Ensures revenue neutrality in practice; won't overestimate tax receipts
+3. **Transparent**: Clearly documented and reproducible
+4. **Prudent**: If actual incomes are higher, the system collects more revenue—a favorable outcome
+
+An optimistic assumption (e.g., £231k) would suggest a lower optimal rate (40.9%), but if the top 1% actually earn closer to £201k, this would create a revenue shortfall. The conservative approach avoids this risk.
+
+### Validation
+
+The revenue-neutral optimization with the conservative assumption achieves perfect revenue matching (difference: £0.00), and the resulting 46.9% rate is only 1.9 percentage points above the current 45%—a reasonable adjustment that maintains the system's fundamental structure while eliminating the trap.
 
 ## Conclusion
 
@@ -156,4 +193,4 @@ The question is not whether the trap should be fixed, but when policymakers will
 
 ---
 
-*Analysis based on UK income distribution data (1999/00 - 2022/23) and tax calculator simulations. Code and methodology available at [github.com/yourrepo/uktax](https://github.com/yourrepo/uktax).*
+*Analysis based on UK income distribution data (1999/00 - 2022/23) and tax calculator simulations. Code and methodology available at [github.com/PeterWurmsdobler/uktax](https://github.com/PeterWurmsdobler/uktax).*

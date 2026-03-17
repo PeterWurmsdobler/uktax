@@ -37,7 +37,8 @@ for i in range(len(histogram.bin_counts)):
     
     max_known_income = histogram.source_data.incomes[-1]
     if income > max_known_income:
-        income = 202000
+        # Conservative assumption: top 1% earn at least 99th percentile
+        income = max_known_income
     
     deductions, _, _ = original_calculator.calculate_total_deductions(income)
     total_revenue += deductions * people
@@ -49,10 +50,12 @@ print(f"   Total revenue: £{total_revenue:,.2f}")
 print("\n3. Optimizing REFORMED tax system...")
 print("   Finding additional rate that generates same revenue...")
 
+# Use conservative assumption: top 1% earn at least 99th percentile
+max_known_income = histogram.source_data.incomes[-1]
 optimal_rate, achieved_revenue = optimize_additional_rate_for_revenue(
     total_revenue, 
     histogram, 
-    202000
+    max_known_income
 )
 
 print(f"\n   ✓ Optimal additional rate: {optimal_rate*100:.2f}%")

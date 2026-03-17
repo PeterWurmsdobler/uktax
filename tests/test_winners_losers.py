@@ -18,12 +18,13 @@ for i in range(len(histogram.bin_counts)):
     # Handle top percentile separately
     max_known_income = histogram.source_data.incomes[-1]
     if income > max_known_income:
-        income = 202000
+        # Conservative assumption: top 1% earn at least 99th percentile
+        income = max_known_income
     total_revenue += original_calc.calculate_total_deductions(income)[0] * people
 
-# Optimize reformed system
+# Optimize reformed system using conservative assumption
 optimal_rate, achieved_revenue = optimize_additional_rate_for_revenue(
-    total_revenue, histogram, top_percentile_income=202000
+    total_revenue, histogram, top_percentile_income=max_known_income
 )
 
 # Create reformed calculator

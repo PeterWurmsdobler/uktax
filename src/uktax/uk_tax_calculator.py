@@ -14,6 +14,27 @@ class TaxBracket:
     name: str
 
 
+class TaperablePAMixin:
+    """Mixin providing personal allowance tapering logic.
+    
+    Classes using this mixin must define:
+    - personal_allowance: float
+    - taper_threshold: float  
+    - taper_rate: float
+    """
+    
+    def calculate_personal_allowance(self, gross_income: float) -> float:
+        """Calculate personal allowance including tapering for high earners.
+        
+        Implements the standard UK PA taper: £1 lost per £2 over threshold.
+        """
+        if gross_income <= self.taper_threshold:
+            return self.personal_allowance
+        
+        reduction = (gross_income - self.taper_threshold) * self.taper_rate
+        return max(0, self.personal_allowance - reduction)
+
+
 @define
 class UKTaxCalculatorBase(ABC):
     """Base class for UK income tax and National Insurance calculators."""
@@ -48,17 +69,17 @@ class UKTaxCalculatorBase(ABC):
         
         if taxable_income <= 0:
             return 0
-        elif taxable_income <= (self.basic_rate_threshold - self.personal_allowance):
+        elif taxable_income <= (self.basic_rate_threshold - personal_allowance):
             # Basic rate band
             return taxable_income * self.basic_rate
-        elif taxable_income <= (self.higher_rate_threshold - self.personal_allowance):
+        elif taxable_income <= (self.higher_rate_threshold - personal_allowance):
             # Higher rate band
-            basic_band = self.basic_rate_threshold - self.personal_allowance
+            basic_band = self.basic_rate_threshold - personal_allowance
             return (basic_band * self.basic_rate + 
                    (taxable_income - basic_band) * self.higher_rate)
         else:
             # Additional rate band
-            basic_band = self.basic_rate_threshold - self.personal_allowance
+            basic_band = self.basic_rate_threshold - personal_allowance
             higher_band = self.higher_rate_threshold - self.basic_rate_threshold
             return (basic_band * self.basic_rate + 
                    higher_band * self.higher_rate +
@@ -168,7 +189,7 @@ class UKTaxCalculatorPre2010(UKTaxCalculatorBase):
 
 
 @define
-class UKTaxCalculator2010(UKTaxCalculatorBase):
+class UKTaxCalculator2010(TaperablePAMixin, UKTaxCalculatorBase):
     """
     UK tax calculator for 2010-2013 (Period 2: Introduction of Additional Rate).
     
@@ -197,18 +218,10 @@ class UKTaxCalculator2010(UKTaxCalculatorBase):
     ni_upper_threshold: float = field(default=42475)  # UEL aligned to 40% threshold
     ni_standard_rate: float = field(default=0.12)  # Increased from 11%
     ni_higher_rate: float = field(default=0.02)  # Increased from 1%
-    
-    def calculate_personal_allowance(self, gross_income: float) -> float:
-        """Calculate personal allowance including tapering for high earners."""
-        if gross_income <= self.taper_threshold:
-            return self.personal_allowance
-        
-        reduction = (gross_income - self.taper_threshold) * self.taper_rate
-        return max(0, self.personal_allowance - reduction)
 
 
 @define
-class UKTaxCalculator2013(UKTaxCalculatorBase):
+class UKTaxCalculator2013(TaperablePAMixin, UKTaxCalculatorBase):
     """
     UK tax calculator for 2013-2023 (Period 3: The 45% Adjustment Era).
     
@@ -238,18 +251,10 @@ class UKTaxCalculator2013(UKTaxCalculatorBase):
     ni_upper_threshold: float = field(default=50270)  # UEL
     ni_standard_rate: float = field(default=0.12)
     ni_higher_rate: float = field(default=0.02)
-    
-    def calculate_personal_allowance(self, gross_income: float) -> float:
-        """Calculate personal allowance including tapering for high earners."""
-        if gross_income <= self.taper_threshold:
-            return self.personal_allowance
-        
-        reduction = (gross_income - self.taper_threshold) * self.taper_rate
-        return max(0, self.personal_allowance - reduction)
 
 
 @define
-class UKTaxCalculator2023(UKTaxCalculatorBase):
+class UKTaxCalculator2023(TaperablePAMixin, UKTaxCalculatorBase):
     """
     UK tax calculator for 2023-present (Period 4: The Alignment Era).
     
@@ -280,14 +285,6 @@ class UKTaxCalculator2023(UKTaxCalculatorBase):
     ni_upper_threshold: float = field(default=50270)
     ni_standard_rate: float = field(default=0.08)  # Cut from 12%
     ni_higher_rate: float = field(default=0.02)
-    
-    def calculate_personal_allowance(self, gross_income: float) -> float:
-        """Calculate personal allowance including tapering for high earners."""
-        if gross_income <= self.taper_threshold:
-            return self.personal_allowance
-        
-        reduction = (gross_income - self.taper_threshold) * self.taper_rate
-        return max(0, self.personal_allowance - reduction)
 
 
 @define
@@ -325,9 +322,10 @@ def optimize_additional_rate_for_revenue(target_revenue: float,
     from uktax.income_data import IncomeHistogram
     
     # Calculate top percentile income from histogram if not provided
+    # Use conservative assumption: top 1% earn at least the 99th percentile value
     if top_percentile_income is None:
         max_known_income = histogram.source_data.incomes[-1]
-        top_percentile_income = max_known_income * 1.15
+        top_percentile_income = max_known_income  # Conservative: minimum income for top 1%
     
     def calculate_revenue_with_rate(additional_rate: float) -> float:
         """Calculate total revenue for a given additional rate."""
