@@ -141,6 +141,8 @@ An alternative reform maintains the current 45% additional rate while removing t
 
 This variant is highly politically favorable as it maintains the current 45% top rate while eliminating the 60% trap. Remarkably, **nobody pays more** under this reform - all changes are either neutral or beneficial to taxpayers. This is possible because removing the taper brings more income into the tax base at consistent rates, generating £4.0 million less revenue overall - a modest cost for eliminating a significant distortion in the tax system.
 
+**Political Considerations:** While this reform is simpler to communicate (maintaining the familiar 45% rate) and creates no losers, it faces a significant political challenge: the benefits accrue exclusively to high earners (those earning £100k-£200k+). The 3,993 winners are all in the top 5% of the income distribution. In an environment of fiscal constraint and public service pressures, a reform that reduces revenue while benefiting only the wealthy may struggle to gain political support, even though it corrects a genuine system flaw. The revenue-neutral reform (Section 2.1), while requiring a higher rate, has a stronger political case as it demonstrates that fixing the trap need not cost the exchequer anything.
+
 ## 3. Methodology: Top 1% Income Assumption
 
 ### The Data Constraint

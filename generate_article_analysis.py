@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Generate all analysis, plots, and data for the comprehensive article."""
 
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend for batch plot generation
+
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path

@@ -202,7 +202,7 @@ class UKTaxCalculator2010(TaperablePAMixin, UKTaxCalculatorBase):
     
     # Override default parameters for this period
     personal_allowance: float = field(default=6475)
-    basic_rate_threshold: float = field(default=35000 + 6475)  # ~£35,000 taxable + PA
+    basic_rate_threshold: float = field(default=37400 + 6475)  # £37,400 taxable + PA = £43,875
     higher_rate_threshold: float = field(default=150000)  # Additional rate starts at £150k
     
     basic_rate: float = field(default=0.20)
@@ -214,8 +214,8 @@ class UKTaxCalculator2010(TaperablePAMixin, UKTaxCalculatorBase):
     taper_rate: float = field(default=0.5)
     
     # National Insurance thresholds and rates for this period
-    ni_lower_threshold: float = field(default=7225)  # Approximate for 2010
-    ni_upper_threshold: float = field(default=42475)  # UEL aligned to 40% threshold
+    ni_lower_threshold: float = field(default=5715)  # Primary Threshold 2010/11
+    ni_upper_threshold: float = field(default=43875)  # UEL aligned with higher rate threshold
     ni_standard_rate: float = field(default=0.12)  # Increased from 11%
     ni_higher_rate: float = field(default=0.02)  # Increased from 1%
 

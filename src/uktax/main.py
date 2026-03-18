@@ -1,11 +1,32 @@
 """Main CLI for UK Tax calculations and visualizations."""
 import argparse
+import sys
+import os
+
+# Ensure interactive backend for CLI BEFORE any matplotlib.pyplot imports
+import matplotlib
+if not os.environ.get('MPLBACKEND'):
+    current_backend = matplotlib.get_backend()
+    if current_backend.lower() == 'agg':
+        # Try to switch to an interactive backend BEFORE importing pyplot
+        for backend in ['TkAgg', 'Qt5Agg', 'GTK3Agg', 'MacOSX']:
+            try:
+                matplotlib.use(backend, force=True)
+                # Verify it worked by checking the backend
+                if matplotlib.get_backend().lower() != 'agg':
+                    break
+            except:
+                continue
+
+# NOW import pyplot - backend is set
 import matplotlib.pyplot as plt
 import numpy as np
-from uktax import (IncomeDistributionData, IncomeHistogram, UK_INCOME_2023,
-                   UKTaxCalculator2023, UKTaxCalculatorReformed, 
-                   IncomeDistributionVisualizer, TaxVisualization,
-                   optimize_additional_rate_for_revenue)
+
+# Import uktax components
+from uktax.income_data import IncomeDistributionData, IncomeHistogram, UK_INCOME_2023
+from uktax.uk_tax_calculator import UKTaxCalculator2023, UKTaxCalculatorReformed, optimize_additional_rate_for_revenue
+# Import visualizations AFTER backend is set
+from uktax.visualizations import IncomeDistributionVisualizer, TaxVisualization
 
 
 def create_distribution_and_histogram(population_size=100000, bin_size=1000, max_income=202000):
@@ -144,7 +165,16 @@ def plot_cumulative_and_histogram_cmd(args):
         show_top_percent=True
     )
     
-    plt.show()
+    # Check if we have an interactive backend
+    backend = matplotlib.get_backend().lower()
+    if backend == 'agg':
+        # Non-interactive backend, save instead
+        output_file = 'income_distribution.png'
+        plt.savefig(output_file, dpi=150, bbox_inches='tight')
+        print(f"✓ Plot saved to {output_file} (no interactive display available)")
+        print(f"  Tip: Install tkinter for interactive plots: sudo apt-get install python3-tk")
+    else:
+        plt.show()
 
 
 def plot_tax_analysis_cmd(args):
@@ -155,7 +185,16 @@ def plot_tax_analysis_cmd(args):
     income_range = np.arange(0, args.max_income_range, args.income_step)
     fig, axes = visualizer.plot_tax_analysis(income_range=income_range)
     
-    plt.show()
+    # Check if we have an interactive backend
+    backend = matplotlib.get_backend().lower()
+    if backend == 'agg':
+        # Non-interactive backend, save instead
+        output_file = 'tax_analysis.png'
+        plt.savefig(output_file, dpi=150, bbox_inches='tight')
+        print(f"✓ Plot saved to {output_file} (no interactive display available)")
+        print(f"  Tip: Install tkinter for interactive plots: sudo apt-get install python3-tk")
+    else:
+        plt.show()
 
 
 def plot_reform_cmd(args):
@@ -361,7 +400,16 @@ def plot_reform_cmd(args):
     print(f"{'Effective Rate':<40} {original_results['effective_rate']:>14.2f}% {reformed_results['effective_rate']:>14.2f}%")
     print("="*70 + "\n")
     
-    plt.show()
+    # Check if we have an interactive backend
+    backend = matplotlib.get_backend().lower()
+    if backend == 'agg':
+        # Non-interactive backend, save instead
+        output_file = 'tax_reform_comparison.png'
+        plt.savefig(output_file, dpi=150, bbox_inches='tight')
+        print(f"✓ Plot saved to {output_file} (no interactive display available)")
+        print(f"  Tip: Install tkinter for interactive plots: sudo apt-get install python3-tk\n")
+    else:
+        plt.show()
 
 
 def main():

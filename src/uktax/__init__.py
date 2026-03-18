@@ -19,10 +19,9 @@ from uktax.uk_tax_calculator import (
     TaxBracket,
     optimize_additional_rate_for_revenue
 )
-from uktax.visualizations import (
-    IncomeDistributionVisualizer, 
-    TaxVisualization
-)
+
+# Visualization classes are not imported by default to avoid importing matplotlib
+# Import them explicitly when needed: from uktax.visualizations import ...
 
 __version__ = "0.1.0"
 
@@ -39,6 +38,4 @@ __all__ = [
     "UKTaxCalculatorReformed",
     "TaxBracket",
     "optimize_additional_rate_for_revenue",
-    "IncomeDistributionVisualizer",
-    "TaxVisualization",
 ]

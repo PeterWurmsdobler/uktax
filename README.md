@@ -14,15 +14,43 @@ The UK tax system has a quirk where the personal allowance (£12,570) is withdra
 
 ## Installation
 
+**Requirements**: Python 3.10+ (Python 3.12+ recommended for interactive plotting)
+
 ```bash
 git clone https://github.com/PeterWurmsdobler/uktax.git
 cd uktax
+
+# If using pyenv (recommended - includes tkinter for interactive plots)
+~/.pyenv/shims/python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+
+# Or use system Python
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -e .
 ```
 
+**Troubleshooting interactive plots:**
+
+If CLI plot commands save PNG files instead of showing interactive windows, your Python doesn't have tkinter:
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install python3-tk
+
+# Fedora/RHEL
+sudo dnf install python3-tkinter
+
+# macOS (via Homebrew)
+brew install python-tk
+```
+
+Alternatively, use pyenv with Python 3.12+ which includes tkinter by default.
+
 ## CLI Usage
 
-The `uktax` command provides four subcommands:
+The `uktax` command provides four subcommands. Interactive plots will display in a window (if tkinter is available) or save to PNG files automatically.
 
 ### 1. Calculate Tax Revenue
 ```bash
@@ -54,6 +82,15 @@ uktax plot-reform --scenario fixed-rate --fixed-rate-percent 45
 Compares current system vs reformed system (no PA taper, higher rate threshold at £100k).
 
 **Key Finding**: Revenue-neutral reform requires **46.9% additional rate** (up from 45%), eliminates the trap, and affects only 4% of taxpayers.
+
+## Features
+
+- **5 Historical Tax Calculators**: Pre-2010, 2010-2013, 2013-2023, 2023-Present, Reformed
+- **Interactive CLI**: Plot income distributions and tax rates with live visualization
+- **Revenue Optimization**: Find revenue-neutral additional rates using scipy optimization
+- **Comprehensive Validation**: 63 automated tests ensure calculation accuracy
+- **Publication-Ready**: Generate article with plots and PDF (article.pdf, 12 pages)
+- **Real Data**: Based on HMRC income distribution data (1999/00-2022/23)
 
 ## Python API
 
@@ -132,13 +169,19 @@ from uktax import (
 ```
 uktax/
 ├── src/uktax/
+│   ├── __init__.py              # Package initialization
 │   ├── income_data.py           # Income distribution classes
 │   ├── uk_tax_calculator.py     # Tax calculators (5 historical periods)
 │   ├── visualizations.py        # Plotting utilities
-│   └── scripts/                 # CLI entry points
-├── tests/                       # Test suite
+│   └── main.py                  # CLI entry point
+├── tests/
+│   └── test_comprehensive_validation.py  # 63 validation tests
+├── article_assets/              # Generated plots for article
 ├── article.md                   # Full analysis and reform proposals
+├── article.pdf                  # PDF version of article (12 pages)
 ├── generate_article_analysis.py # Generates all plots and data
+├── pyproject.toml               # Package configuration
+├── .venv/                       # Virtual environment
 └── README.md                    # This file
 ```
 
@@ -189,13 +232,54 @@ Run comprehensive validation:
 python tests/test_comprehensive_validation.py
 ```
 
-63 tests covering:
-- Marginal rate accuracy
+**Test Suite**: 63 tests covering:
+- Marginal rate accuracy across all income levels
 - Effective rate consistency
-- PA taper correctness
-- Revenue optimization
-- Monotonicity (tax increases with income)
-- Edge cases
+- Personal allowance taper correctness
+- Revenue optimization algorithms
+- Tax monotonicity (tax increases with income)
+- Edge cases and boundary conditions
+- Historical calculator accuracy
+
+All tests passing ✓
+
+## Generating Article Assets
+
+To regenerate all plots and the article PDF:
+
+### Regenerate All Plots (9 PNGs)
+```bash
+python generate_article_analysis.py
+```
+
+This generates all analysis plots in `article_assets/`:
+- Current system 60% trap visualization
+- Historical income distributions (2009/10, 2012/13, 2022/23)
+- System comparisons (Pre-2010 vs 2010, 2010 vs 2013, 2013 vs 2023)
+- Reform comparisons (Current vs Revenue-Neutral, Current vs 45% Fixed)
+
+**Output**: 9 PNG files (~280-475KB each) ready for article inclusion.
+
+### Regenerate Article PDF
+```bash
+sed 's/✅/YES/g; s/⚠️/WARNING/g; s/❌/NO/g' article.md > article_for_pdf.md && \
+pandoc article_for_pdf.md \
+  -o article.pdf \
+  --pdf-engine=pdflatex \
+  -V documentclass=article \
+  -V geometry:"top=0.5in,bottom=0.5in,left=0.6in,right=0.6in" \
+  -V fontsize=10pt \
+  -V colorlinks=true \
+  -V linkcolor=blue \
+  -V urlcolor=blue \
+  -V linestretch=1.0 && \
+rm article_for_pdf.md && \
+echo "✓ PDF regenerated (12 pages)" && \
+ls -lh article.pdf
+```
+
+**Requirements**: `pandoc` and `pdflatex` (from TeX Live or similar)
+**Output**: Compact 12-page PDF (3.3MB) with proper heading structure and all embedded plots.
 
 ## Dependencies
 
