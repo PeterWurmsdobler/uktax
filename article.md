@@ -16,7 +16,7 @@ This system was characterized by its simplicity and the absence of any marginal 
 
 ![Income Distribution 2009/10](article_assets/income_dist_2009_10.png)
 
-**Tax Revenue Estimate (2009/10):** Using the Pre-2010 calculator on a population of 100,000 with the 2009/10 income distribution, the system would generate approximately **£657.7 million** in total revenue (£467.9 million income tax, £189.8 million National Insurance). The mean income was £26,038.
+**Tax Revenue Estimate (2009/10):** Using the Pre-2010 calculator on a population of 100,000 with the 2009/10 income distribution, the system would generate approximately **£648.5 million** in total revenue (£458.9 million income tax, £189.6 million National Insurance). The mean income was £26,038.
 
 ### 1.2. The Introduction of the "Additional Rate" (2010-2013)
 
@@ -33,11 +33,11 @@ While the stated aim was to ensure high earners contributed more, the tapering m
 
 **Impact Analysis (transition from Pre-2010 to 2010-2013 system using 2010/11 data):**
 
-- **Winners (pay less):** 62,200 people (62.2%) saved an average of **£90/year**
-- **Losers (pay more):** 37,800 people (37.8%) paid an average of **£404/year** more
-- **Net revenue increase:** £9.7 million
+- **Winners (pay less):** 0 people (0%)
+- **Losers (pay more):** 100,000 people (100.0%) paid an average of **£223/year** more
+- **Net revenue increase:** £22.3 million
 
-The majority of taxpayers saw slight reductions due to increased personal allowances and threshold adjustments, but high earners faced significantly higher bills. The 60% trap affected a relatively small number of people initially, as fewer earners fell in this range during the post-crisis period.
+This was a universal tax increase as the government introduced both the 50% additional rate for high earners and the personal allowance taper that created the 60% trap. National Insurance rates also increased (from 11% to 12% main rate, 1% to 2% higher rate). Everyone who paid tax saw their bill increase, with high earners bearing the largest increases.
 
 ### 1.3. The 45% Adjustment Era (2013-2023)
 
@@ -51,9 +51,9 @@ The additional rate threshold remained at £150,000, meaning the 60% trap now ex
 
 **Impact Analysis (transition from 2010-2013 to 2013-2023 system using 2013/14 data):**
 
-- **Winners (pay less):** 99,999 people (100.0%) saved an average of **£1,935/year**
+- **Winners (pay less):** 99,999 people (100.0%) saved an average of **£2,036/year**
 - **Losers (pay more):** 0 people (0%)
-- **Net revenue decrease:** £193.5 million
+- **Net revenue decrease:** £203.6 million
 
 This was overwhelmingly a tax cut, primarily driven by the increased personal allowance and the reduction in the additional rate from 50% to 45%. The broader population benefited significantly, though the 60% trap remained embedded in the system, now affecting a wider income range.
 
@@ -71,13 +71,13 @@ Additionally, National Insurance rates were cut: the standard rate reduced from 
 
 **Impact Analysis (transition from 2013-2023 to 2023-Present system using 2022/23 data):**
 
-- **Winners (pay less):** 98,499 people (98.5%) saved an average of **£757/year**
+- **Winners (pay less):** 98,499 people (98.5%) saved an average of **£723/year**
 - **Losers (pay more):** 0 people (0%)
-- **Net revenue decrease:** £74.6 million
+- **Net revenue decrease:** £71.2 million
 
 The National Insurance cut was another broad-based tax reduction, benefiting almost everyone. Despite the reduction in the additional rate threshold (which increased taxes for those earning above £125,140), the overall effect was a net tax cut due to the substantial NI reduction.
 
-**Current System Revenue (2023-Present using 2022/23 data):** £801.7 million total revenue for 100,000 people (£640.9 million income tax, £160.9 million NI). Mean income: £37,292.
+**Current System Revenue (2023-Present using 2022/23 data):** £794.0 million total revenue for 100,000 people (£633.7 million income tax, £160.3 million NI). Mean income: £37,292.
 
 ## 2. Reform: Eliminating the Trap
 
