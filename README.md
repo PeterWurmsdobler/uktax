@@ -89,7 +89,7 @@ Compares current system vs reformed system (no PA taper, higher rate threshold a
 - **Interactive CLI**: Plot income distributions and tax rates with live visualization
 - **Revenue Optimization**: Find revenue-neutral additional rates using scipy optimization
 - **Comprehensive Validation**: 63 automated tests ensure calculation accuracy
-- **Publication-Ready**: Generate article with plots and PDF (article.pdf, 12 pages)
+- **Publication-Ready**: Generate article with plots and PDF (article.pdf, 11 pages)
 - **Real Data**: Based on HMRC income distribution data (1999/00-2022/23)
 
 ## Python API
@@ -178,7 +178,7 @@ uktax/
 │   └── test_comprehensive_validation.py  # 63 validation tests
 ├── article_assets/              # Generated plots for article
 ├── article.md                   # Full analysis and reform proposals
-├── article.pdf                  # PDF version of article (12 pages)
+├── article.pdf                  # PDF version of article (11 pages)
 ├── generate_article_analysis.py # Generates all plots and data
 ├── pyproject.toml               # Package configuration
 ├── .venv/                       # Virtual environment
@@ -262,24 +262,43 @@ This generates all analysis plots in `article_assets/`:
 
 ### Regenerate Article PDF
 ```bash
+# Create LaTeX header for optimized layout
+cat > /tmp/header.tex << 'EOF'
+\usepackage{placeins}
+\usepackage{graphicx}
+% Reduce space around figures
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+% Better float placement
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.7}
+EOF
+
+# Generate PDF
 sed 's/✅/YES/g; s/⚠️/WARNING/g; s/❌/NO/g' article.md > article_for_pdf.md && \
 pandoc article_for_pdf.md \
   -o article.pdf \
   --pdf-engine=pdflatex \
+  -H /tmp/header.tex \
   -V documentclass=article \
-  -V geometry:"top=0.5in,bottom=0.5in,left=0.6in,right=0.6in" \
+  -V geometry:"a4paper,top=0.45in,bottom=0.45in,left=0.55in,right=0.55in" \
   -V fontsize=10pt \
   -V colorlinks=true \
   -V linkcolor=blue \
   -V urlcolor=blue \
-  -V linestretch=1.0 && \
+  -V linestretch=0.92 && \
 rm article_for_pdf.md && \
-echo "✓ PDF regenerated (12 pages)" && \
+echo "✓ PDF regenerated (11 pages)" && \
 ls -lh article.pdf
 ```
 
 **Requirements**: `pandoc` and `pdflatex` (from TeX Live or similar)
-**Output**: Compact 12-page PDF (3.3MB) with proper heading structure and all embedded plots.
+**Output**: Compact 11-page PDF (3.3MB) with proper heading structure and all embedded plots.
 
 ## Dependencies
 
