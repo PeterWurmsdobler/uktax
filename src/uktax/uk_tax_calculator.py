@@ -63,27 +63,44 @@ class UKTaxCalculatorBase(ABC):
         pass
     
     def calculate_income_tax(self, gross_income: float) -> float:
-        """Calculate income tax for a given gross income."""
+        """Calculate income tax for a given gross income.
+        
+        UK tax system uses:
+        - Basic rate band: defined on TAXABLE income
+        - Additional rate: defined on GROSS income
+        """
         personal_allowance = self.calculate_personal_allowance(gross_income)
         taxable_income = max(0, gross_income - personal_allowance)
         
         if taxable_income <= 0:
             return 0
-        elif taxable_income <= (self.basic_rate_threshold - personal_allowance):
-            # Basic rate band
+        
+        # Basic rate band calculation: varies by period based on PA at zero income
+        # For someone with full PA, the basic_rate_threshold is where they hit higher rate
+        # So basic_taxable_limit = basic_rate_threshold - full_PA
+        full_personal_allowance = self.calculate_personal_allowance(0)  # PA at zero income
+        basic_taxable_limit = self.basic_rate_threshold - full_personal_allowance
+        
+        # Additional rate threshold is £125,140 of GROSS income
+        # Check if we're in the additional rate band
+        if gross_income > self.higher_rate_threshold:
+            # Additional rate applies to gross income above £125,140
+            additional_income = gross_income - self.higher_rate_threshold
+            # tax on income from PA to basic limit
+            basic_tax = basic_taxable_limit * self.basic_rate
+            # tax on income from basic limit to additional rate threshold (gross)
+            higher_taxable = (self.higher_rate_threshold - personal_allowance) - basic_taxable_limit
+            higher_tax = higher_taxable * self.higher_rate
+            # tax on income above additional rate threshold
+            additional_tax = additional_income * self.additional_rate
+            return basic_tax + higher_tax + additional_tax
+        elif taxable_income <= basic_taxable_limit:
+            # Entirely in basic rate band
             return taxable_income * self.basic_rate
-        elif taxable_income <= (self.higher_rate_threshold - personal_allowance):
-            # Higher rate band
-            basic_band = self.basic_rate_threshold - personal_allowance
-            return (basic_band * self.basic_rate + 
-                   (taxable_income - basic_band) * self.higher_rate)
         else:
-            # Additional rate band
-            basic_band = self.basic_rate_threshold - personal_allowance
-            higher_band = self.higher_rate_threshold - self.basic_rate_threshold
-            return (basic_band * self.basic_rate + 
-                   higher_band * self.higher_rate +
-                   (gross_income - self.higher_rate_threshold) * self.additional_rate)
+            # In higher rate band only
+            return (basic_taxable_limit * self.basic_rate + 
+                   (taxable_income - basic_taxable_limit) * self.higher_rate)
     
     def calculate_national_insurance(self, gross_income: float) -> float:
         """Calculate National Insurance contributions (Category A)."""
@@ -202,7 +219,7 @@ class UKTaxCalculator2010(TaperablePAMixin, UKTaxCalculatorBase):
     
     # Override default parameters for this period
     personal_allowance: float = field(default=6475)
-    basic_rate_threshold: float = field(default=37400 + 6475)  # £37,400 taxable + PA = £43,875
+    basic_rate_threshold: float = field(default=37400 + 6475)  # £37,400 taxable + PA = £43,875 (same as Pre-2010)
     higher_rate_threshold: float = field(default=150000)  # Additional rate starts at £150k
     
     basic_rate: float = field(default=0.20)
@@ -215,7 +232,7 @@ class UKTaxCalculator2010(TaperablePAMixin, UKTaxCalculatorBase):
     
     # National Insurance thresholds and rates for this period
     ni_lower_threshold: float = field(default=5715)  # Primary Threshold 2010/11
-    ni_upper_threshold: float = field(default=43875)  # UEL aligned with higher rate threshold
+    ni_upper_threshold: float = field(default=37400 + 6475)  # UEL aligned with basic rate threshold = £43,875
     ni_standard_rate: float = field(default=0.12)  # Increased from 11%
     ni_higher_rate: float = field(default=0.02)  # Increased from 1%
 
