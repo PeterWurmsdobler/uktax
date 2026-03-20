@@ -89,7 +89,7 @@ Compares current system vs reformed system (no PA taper, higher rate threshold a
 - **Interactive CLI**: Plot income distributions and tax rates with live visualization
 - **Revenue Optimization**: Find revenue-neutral additional rates using scipy optimization
 - **Comprehensive Validation**: 63 automated tests ensure calculation accuracy
-- **Publication-Ready**: Generate article with plots and PDF (article.pdf, 11 pages)
+- **Publication-Ready**: Generate article with plots and PDF (article.pdf, 13 pages)
 - **Real Data**: Based on HMRC income distribution data (1999/00-2022/23)
 
 ## Python API
@@ -178,7 +178,7 @@ uktax/
 │   └── test_comprehensive_validation.py  # 63 validation tests
 ├── article_assets/              # Generated plots for article
 ├── article.md                   # Full analysis and reform proposals
-├── article.pdf                  # PDF version of article (11 pages)
+├── article.pdf                  # PDF version of article (13 pages)
 ├── generate_article_analysis.py # Generates all plots and data
 ├── pyproject.toml               # Package configuration
 ├── .venv/                       # Virtual environment
@@ -207,9 +207,15 @@ uktax/
 
 ### Alternative: 45% Fixed Rate Reform
 - Same as above but keep 45% rate
-- Revenue decrease: £4.0M (0.5% of total)
-- Winners: 3,993 people (4.0%) save £1,014/year average
+- Revenue decrease: £12.1M (1.5% of total)
+- Winners: 3,993 people (4.0%) save £3,041/year average
 - Losers: **0 people** (nobody pays more!)
+
+### Alternative: 55% Fixed Rate Reform
+- Same as above but use 55% rate (higher progressivity)
+- Revenue increase: £8.7M (1.1% of total - revenue-positive)
+- Winners: 1,845 people (1.8%) save £565/year average
+- Losers: 2,148 people (2.1%) pay £4,535/year more
 
 ## Methodology Notes
 
@@ -247,7 +253,7 @@ All tests passing ✓
 
 To regenerate all plots and the article PDF:
 
-### Regenerate All Plots (9 PNGs)
+### Regenerate All Plots (10 PNGs)
 ```bash
 python generate_article_analysis.py
 ```
@@ -256,9 +262,9 @@ This generates all analysis plots in `article_assets/`:
 - Current system 60% trap visualization
 - Historical income distributions (2009/10, 2012/13, 2022/23)
 - System comparisons (Pre-2010 vs 2010, 2010 vs 2013, 2013 vs 2023)
-- Reform comparisons (Current vs Revenue-Neutral, Current vs 45% Fixed)
+- Reform comparisons (Current vs Revenue-Neutral, Current vs 45% Fixed, Current vs 55% Fixed)
 
-**Output**: 9 PNG files (~280-475KB each) ready for article inclusion.
+**Output**: 10 PNG files (~280-475KB each) ready for article inclusion.
 
 ### Regenerate Article PDF
 ```bash
@@ -293,12 +299,12 @@ pandoc article_for_pdf.md \
   -V urlcolor=blue \
   -V linestretch=0.92 && \
 rm article_for_pdf.md && \
-echo "✓ PDF regenerated (11 pages)" && \
+echo "✓ PDF regenerated (13 pages)" && \
 ls -lh article.pdf
 ```
 
 **Requirements**: `pandoc` and `pdflatex` (from TeX Live or similar)
-**Output**: Compact 11-page PDF (3.3MB) with proper heading structure and all embedded plots.
+**Output**: Compact 13-page PDF (3.7MB) with proper heading structure and all embedded plots.
 
 ## Dependencies
 

@@ -490,6 +490,20 @@ def main():
                                                "Current (2023)", "Reformed (45%)",
                                                "2022/23")
     
+    # Reform 3: Fixed 50% rate (original introduction rate)
+    print("\n[8] Reform 3: Fixed 55% Additional Rate")
+    calc_reformed_50 = UKTaxCalculatorReformed(additional_rate=0.55)
+    revenue_reformed_50, _ = calculate_tax_revenue(calc_reformed_50, "2022/23", "Reformed (55%) System")
+    
+    plot_tax_difference(calc_2023, calc_reformed_50,
+                       "Current (2023)", "Reformed (55%)",
+                       "comparison_2023_vs_reformed_55.png",
+                       "2022/23")
+    
+    wl_reformed_50 = calculate_winners_losers(calc_2023, calc_reformed_50,
+                                               "Current (2023)", "Reformed (55%)",
+                                               "2022/23")
+    
     print("\n" + "="*70)
     print("ALL ANALYSIS COMPLETE!")
     print(f"Output directory: {OUTPUT_DIR.absolute()}")
@@ -503,12 +517,14 @@ def main():
         'revenue_2023': revenue_2023,
         'revenue_reformed_neutral': achieved_revenue,
         'revenue_reformed_45': revenue_reformed_45,
+        'revenue_reformed_50': revenue_reformed_50,
         'optimal_rate': optimal_rate,
         'wl_2010': wl_2010,
         'wl_2013': wl_2013,
         'wl_2023': wl_2023,
         'wl_reformed_neutral': wl_reformed_neutral,
         'wl_reformed_45': wl_reformed_45,
+        'wl_reformed_50': wl_reformed_50,
     }
 
 

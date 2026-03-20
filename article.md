@@ -143,6 +143,37 @@ This variant is highly politically favorable as it maintains the current 45% top
 
 **Political Considerations:** While this reform is simpler to communicate (maintaining the familiar 45% rate) and creates no losers, it faces a political challenge: the benefits accrue exclusively to high earners (those earning £100k-£200k+). The 3,993 winners are all in the top 5% of the income distribution. In an environment of fiscal constraint and public service pressures, a reform that reduces revenue by £12.1 million while benefiting only the wealthy may struggle to gain political support. The revenue-neutral reform (Section 2.1), while requiring a 50.8% rate (up from 45%), has a stronger political case as it demonstrates that fixing the trap need not cost the exchequer anything.
 
+### 2.3. Reformed System with 55% Additional Rate
+
+A third reform option sets the additional rate at 55% while removing the taper and setting the higher rate threshold at £100,000. This results in a revenue increase (£810.8 million, an increase of £8.7 million or 1.1%).
+
+**Reformed System Characteristics:**
+- Personal allowance: £12,570 for everyone (no taper)
+- Basic rate: 20% (£12,571 - £50,270)
+- Higher rate: 40% (£50,271 - £100,000)
+- Additional rate: **55%** (above £100,000)
+- National Insurance: 8% (£12,571 - £50,270), 2% (above £50,270)
+
+![Comparison: Current vs 55% Reform](article_assets/comparison_2023_vs_reformed_55.png)
+
+**Impact Analysis (Current system → 55% Reform using 2022/23 data):**
+
+- **Winners (pay less):** 1,845 people (1.8%) save an average of **£565/year**
+  - Total savings: £1,041,887
+- **Losers (pay more):** 2,148 people (2.1%) pay an average of **£4,535/year** more
+  - Total costs: £9,741,926
+- **Unchanged:** 96,006 people (96.0%)
+- **Net revenue change:** +£8.7 million
+
+This reform provides a revenue-positive option while eliminating the 60% trap. The 55% additional rate generates £8.7 million more revenue than the current system (a 1.1% increase), which could be used to fund public services or reduce the deficit. However, this comes at the cost of higher taxes for the top earners above £100,000.
+
+**Comparison with Other Reforms:**
+- **Revenue-Neutral (50.8%):** Perfect revenue match, balanced impact
+- **45% Fixed:** Creates no losers but costs £12.1 million (1.5% revenue loss)
+- **55% Fixed:** Revenue-positive (+£8.7M or +1.1%), eliminates trap, higher taxes on top earners
+
+**Political Considerations:** The 55% rate makes the system more progressive by increasing taxes on the highest earners while eliminating the 60% trap that affects those earning £100-125k. This reform could appeal to those who believe the wealthy should contribute more while fixing a system flaw. The revenue increase could help fund public services in a fiscally constrained environment. However, concerns about competitiveness and brain drain at very high tax rates would need to be addressed.
+
 ## 3. Methodology: Top 1% Income Assumption
 
 ### The Data Constraint
@@ -184,7 +215,13 @@ The UK tax system's evolution since 2010 has inadvertently created a significant
 
 The historical analysis reveals that this trap was not designed deliberately but emerged from the interaction of multiple policy changes: the introduction of the personal allowance taper in 2010, the increase in the personal allowance to £12,570, and the recent alignment of the additional rate threshold with the taper endpoint.
 
-Reform is both necessary and achievable. By eliminating the personal allowance taper and adjusting the additional rate threshold to £100,000, we can create a fairer, more efficient tax system. Whether the additional rate is set at 45% (with a £12.1M revenue decrease) or 50.8% (for strict revenue neutrality), the benefits are clear:
+Reform is both necessary and achievable. By eliminating the personal allowance taper and adjusting the additional rate threshold to £100,000, we can create a fairer, more efficient tax system. Three reform options present different trade-offs:
+
+1. **Revenue-Neutral (50.8% rate):** Perfect revenue match, eliminates the trap, balanced impact
+2. **Fixed 45% rate:** Simple to communicate, creates no losers, costs £12.1M (1.5% of revenue)
+3. **Fixed 55% rate:** Revenue-positive (+£8.7M or +1.1%), eliminates trap, higher progressivity
+
+All three options deliver the key benefits:
 
 - **Fairness:** Marginal rates increase monotonically with income, without anomalous spike zones.
 - **Efficiency:** Removes incentives for tax avoidance and distortionary behavior in the £100k-£125k range.
