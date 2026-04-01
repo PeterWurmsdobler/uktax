@@ -176,59 +176,11 @@ This reform provides a revenue-positive option while eliminating the 60% trap. T
 
 ## 3. Methodology: Top 1% Income Assumption
 
-### The Data Constraint
-
-HMRC publishes income distribution data from the 1st to 99th percentile. For 2022/23, the 99th percentile is £201,000. Beyond this, we have no specific data about the income distribution of the top 1% of earners. For revenue calculations involving 100,000 people, this means we know the incomes of 99,000 people but must make an assumption about the remaining 1,000.
-
-### Conservative Approach
-
-We adopt a **conservative assumption**: the top 1% earn at least the 99th percentile value (£201,000). This is the only fact we know with certainty from the data.
-
-### Why This Matters
-
-The assumption about top 1% income has a significant impact on revenue calculations and optimal rate determination:
-
-| Top 1% Assumption | Optimal Additional Rate | Reliability |
-|-------------------|------------------------|-------------|
-| **£201k (99th percentile)** | **46.9%** | ✅ Conservative, based on known data |
-| £221k (+10% speculation) | 42.8% | ⚠️ Speculative |
-| £231k (+15% speculation) | 45.9% | ❌ Optimistic, risks revenue shortfall |
-
-The difference is substantial: **6 percentage points** between the conservative and a 15% optimistic assumption!
-
-### Rationale for Conservative Choice
-
-1. **Defensible**: Based solely on actual HMRC data, not speculation
-2. **Safe**: Ensures revenue neutrality in practice; won't overestimate tax receipts
-3. **Transparent**: Clearly documented and reproducible
-4. **Prudent**: If actual incomes are higher, the system collects more revenue—a favorable outcome
-
-An optimistic assumption (e.g., £231k) would suggest a lower optimal rate (45.9%), but if the top 1% actually earn closer to £201k, this would create a revenue shortfall. The conservative approach avoids this risk.
-
-### Validation
-
-The revenue-neutral optimization with the conservative assumption achieves perfect revenue matching (difference: £0.00), and the resulting 46.9% rate is only 1.9 percentage points above the current 45%—a reasonable adjustment that maintains the system's fundamental structure while eliminating the trap.
+HMRC publishes income distribution data from the 1st to 99th percentile. For 2022/23, the 99th percentile is £201,000. For the top 1% of earners, we assume they earn at least this amount. This conservative assumption ensures revenue calculations are based on known data rather than speculation, avoiding the risk of overestimating tax receipts from high earners.
 
 ## Conclusion
 
-The UK tax system's evolution since 2010 has inadvertently created a significant policy failure: the 60% marginal rate trap. What began as a well-intentioned attempt to increase tax contributions from high earners has resulted in a system that violates basic principles of tax design, creates perverse incentives, and penalizes those earning £100,000-£125,140 more heavily than those earning substantially more.
-
-The historical analysis reveals that this trap was not designed deliberately but emerged from the interaction of multiple policy changes: the introduction of the personal allowance taper in 2010, the increase in the personal allowance to £12,570, and the recent alignment of the additional rate threshold with the taper endpoint.
-
-Reform is both necessary and achievable. By eliminating the personal allowance taper and adjusting the additional rate threshold to £100,000, we can create a fairer, more efficient tax system. Three reform options present different trade-offs:
-
-1. **Revenue-Neutral (50.8% rate):** Perfect revenue match, eliminates the trap, balanced impact
-2. **Fixed 45% rate:** Simple to communicate, creates no losers, costs £12.1M (1.5% of revenue)
-3. **Fixed 55% rate:** Revenue-positive (+£8.7M or +1.1%), eliminates trap, higher progressivity
-
-All three options deliver the key benefits:
-
-- **Fairness:** Marginal rates increase monotonically with income, without anomalous spike zones.
-- **Efficiency:** Removes incentives for tax avoidance and distortionary behavior in the £100k-£125k range.
-- **Simplicity:** The personal allowance is the same for everyone, making the system easier to understand.
-- **Limited impact:** 96% of taxpayers are unaffected, with only 4% seeing changes (1% winners, 3% paying more).
-
-The question is not whether the trap should be fixed, but when policymakers will prioritize systemic coherence over the inertia of incremental change. The evidence from over a decade of this flawed system is clear: it is time to reform.
+The UK tax system creates a 60% marginal rate trap between £100,000 and £125,140 due to personal allowance tapering. This trap emerged from policy changes introduced in 2010 and has persisted through subsequent reforms. Eliminating the personal allowance taper and setting the higher rate threshold at £100,000 would remove this anomaly. Three reform options are available: (1) Revenue-Neutral (50.8% rate) - perfect revenue match with balanced impact; (2) Fixed 45% rate - creates no losers but reduces revenue by £12.1M (1.5%); (3) Fixed 55% rate - increases revenue by £8.7M (1.1%) with higher progressivity. All three options eliminate the trap while maintaining 96% of taxpayers unaffected.
 
 ---
 

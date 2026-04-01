@@ -168,15 +168,18 @@ from uktax import (
 
 ```
 uktax/
-├── src/uktax/
-│   ├── __init__.py              # Package initialization
-│   ├── income_data.py           # Income distribution classes
-│   ├── uk_tax_calculator.py     # Tax calculators (5 historical periods)
-│   ├── visualizations.py        # Plotting utilities
-│   └── main.py                  # CLI entry point
+├── src/
+│   ├── data/
+│   │   └── UK-income-before-tax.csv # HMRC income distribution data (1999/00-2022/23)
+│   └── uktax/
+│       ├── __init__.py              # Package initialization
+│       ├── income_data.py           # Income distribution classes
+│       ├── uk_tax_calculator.py     # Tax calculators (5 historical periods)
+│       ├── visualizations.py        # Plotting utilities
+│       └── main.py                  # CLI entry point
 ├── tests/
 │   └── test_comprehensive_validation.py  # 63 validation tests
-├── article_assets/              # Generated plots for article
+├── article_assets/              # Generated plots for article (10 PNGs)
 ├── article.md                   # Full analysis and reform proposals
 ├── article.pdf                  # PDF version of article (13 pages)
 ├── generate_article_analysis.py # Generates all plots and data
@@ -233,8 +236,9 @@ See [article.md](article.md) for full details.
 
 ## Testing
 
-Run comprehensive validation:
+Run comprehensive validation (requires virtual environment):
 ```bash
+source .venv/bin/activate
 python tests/test_comprehensive_validation.py
 ```
 
@@ -251,24 +255,33 @@ All tests passing ✓
 
 ## Generating Article Assets
 
-To regenerate all plots and the article PDF:
+**Requirements for PDF generation**: 
+- `pandoc` (document converter)
+- `pdflatex` (from TeX Live or similar LaTeX distribution)
 
-### Regenerate All Plots (10 PNGs)
+Install on Ubuntu/Debian:
 ```bash
-python generate_article_analysis.py
+sudo apt-get install pandoc texlive-latex-base texlive-latex-extra
 ```
 
-This generates all analysis plots in `article_assets/`:
-- Current system 60% trap visualization
-- Historical income distributions (2009/10, 2012/13, 2022/23)
-- System comparisons (Pre-2010 vs 2010, 2010 vs 2013, 2013 vs 2023)
-- Reform comparisons (Current vs Revenue-Neutral, Current vs 45% Fixed, Current vs 55% Fixed)
-
-**Output**: 10 PNG files (~280-475KB each) ready for article inclusion.
-
-### Regenerate Article PDF
+Install on macOS:
 ```bash
-# Create LaTeX header for optimized layout
+brew install pandoc
+brew install --cask mactex
+```
+
+### Complete Workflow
+
+To regenerate the entire analysis from scratch:
+
+```bash
+# 1. Activate virtual environment
+source .venv/bin/activate
+
+# 2. Generate all 10 plots with analysis calculations
+python generate_article_analysis.py
+
+# 3. Generate the PDF article
 cat > /tmp/header.tex << 'EOF'
 \usepackage{placeins}
 \usepackage{graphicx}
@@ -285,7 +298,6 @@ cat > /tmp/header.tex << 'EOF'
 \renewcommand{\floatpagefraction}{0.7}
 EOF
 
-# Generate PDF
 sed 's/✅/YES/g; s/⚠️/WARNING/g; s/❌/NO/g' article.md > article_for_pdf.md && \
 pandoc article_for_pdf.md \
   -o article.pdf \
@@ -293,18 +305,39 @@ pandoc article_for_pdf.md \
   -H /tmp/header.tex \
   -V documentclass=article \
   -V geometry:"a4paper,top=0.45in,bottom=0.45in,left=0.55in,right=0.55in" \
-  -V fontsize=10pt \
+  -V fontsize=11pt \
   -V colorlinks=true \
   -V linkcolor=blue \
   -V urlcolor=blue \
   -V linestretch=0.92 && \
 rm article_for_pdf.md && \
-echo "✓ PDF regenerated (13 pages)" && \
-ls -lh article.pdf
+echo "✓ Complete regeneration finished" && \
+ls -lh article.pdf article_assets/*.png
 ```
 
-**Requirements**: `pandoc` and `pdflatex` (from TeX Live or similar)
-**Output**: Compact 13-page PDF (3.7MB) with proper heading structure and all embedded plots.
+**What this produces**:
+- **Step 2**: 10 PNG plots in `article_assets/` with all tax analysis calculations
+- **Step 3**: `article.pdf` (13 pages, A4, 11pt font) with all plots embedded
+- Console output shows: revenue calculations, winners/losers for all transitions, optimal rates
+
+### Regenerate All Plots (10 PNGs)
+```bash
+python generate_article_analysis.py
+```
+
+This generates all analysis plots in `article_assets/`:
+- Current system 60% trap visualization
+- Historical income distributions (2009/10, 2012/13, 2022/23)
+- System comparisons (Pre-2010 vs 2010, 2010 vs 2013, 2013 vs 2023)
+- Reform comparisons (Current vs Revenue-Neutral, Current vs 45% Fixed, Current vs 55% Fixed)
+
+**Output**: 10 PNG files (~280-475KB each) ready for article inclusion.
+
+**Note**: The script automatically calculates:
+- Tax revenue for each historical period
+- Winners/losers analysis for each system transition
+- Optimal additional rate for revenue-neutral reform (50.8%)
+- Impact analysis for 45% and 55% fixed rate reforms
 
 ## Dependencies
 
